@@ -1,139 +1,21 @@
 const express = require("express");
-const app = express();
 const route = express.Router();
-const db = require("../db/db");
-
-// app.use(express.json())
-// app.use(express.urlencoded({ extended:false} ))
+const control = require('../controllers/controller')
+const db = require('../db/db')
 
 // GET (READ)
-route.get("/all", async (req, res) => {
-  const data = await db.select().from("place");
-
-  res.json({
-    data,
-  });
-});
-
-route.get("/search", async (req, res) => {
-  const { city } = req.query;
-
-  const data = await db("place")
-    .where({
-      city,
-    })
-    .select();
-
-  res.json({
-    data,
-  });
-});
+route.get("/all", control.getAll);
+route.get("/search", control.getSearch);
 
 // POST(CREATE)
-route.post("/new", async (req, res) => {
-  const { name, address, city } = req.body;
-
-  await db("place")
-    .insert({
-      name,
-      city,
-      address,
-    })
-    .catch((error) => {
-      console.error(`${error}`);
-    });
-
-  res.json({
-    message: "Post processed",
-  });
-});
+route.post("/new", control.postData);
 
 // DELETE (DEL)
-route.delete("/delete", async (req, res) => {
-  await db("place").del();
-
-  const data = await db.select().from("place");
-
-  res.json({
-    data,
-  });
-});
-
-route.delete("/search", async (req, res) => {
-  const { name, city } = req.body;
-
-  await db("place")
-    .where({
-      name,
-      city,
-    })
-    .del();
-
-  const data = await db.select().from("place");
-
-  res.json({
-    data,
-  });
-});
+route.delete("/delete", control.deleteAll);
+route.delete("/search", control.deleteSearch);
 
 // PUT DAN PATCH
-
-route.put("/update/:city/:name", async (req, res) => {
-  const passedCity = req.params.city;
-  const passedName = req.params.name;
-  const { name, city, address } = req.body;
-
-  const data = await db("place")
-    .where({
-      name: passedName,
-      city: passedCity,
-    })
-    .update(
-      {
-        name,
-        city,
-        address,
-      },
-      ["name", "city", "address"]
-    );
-
-  res.json({
-    data,
-  });
-});
-
-route.patch("/patch/:city/:name", async (req, res) => {
-  const passedName = req.params.name;
-  const passedCity = req.params.city;
-  const { name, city, address } = req.body;
-  let namePointer = passedName;
-  let cityPointer = passedCity;
-
-  if (city) {
-    cityPointer = city;
-    await db("place")
-      .where({ name: passedName, city: passedCity })
-      .update({ city });
-  }
-  if (name) {
-    namePointer = name;
-    await db("place")
-      .where({ name: passedName, city: passedCity })
-      .update({ name });
-  }
-  if (address) {
-    await db("place")
-      .where({ name: passedName, city: passedCity })
-      .update({ address });
-  }
-
-  const data = await db("place")
-    .where({ name: namePointer, city: cityPointer })
-    .select(["name", "city", "address"]);
-
-  res.json({
-    data,
-  });
-});
+route.put("/update/:city/:name", control.updatePut);
+route.patch("/patch/:city/:name", control.updatePatch);
 
 module.exports = route;
