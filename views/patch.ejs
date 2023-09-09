@@ -1,0 +1,29 @@
+<%- include('./partials/header.ejs') %>
+
+    <div class="container">
+      <div class="container-fluid">
+        <h1>Introduction PATCH</h1>
+        <p class="fs-5">
+          Request PATCH digunakan merubah beberapa data yang sudah
+          dispesifikasikan oleh user melalui parameter URL
+        </p>
+        <div class="container-fluid ms-3 color-light py-3">
+          <h3>PATCH data</h3>
+          <p class="fs-6">
+            Request PATCH akan mengganti data yang sudah berada di tabel
+            database berdasarkan parameter yang dimasukkan oleh user ke dalam
+            URL. URL yang digunakan yaitu:
+          </p>
+          <span class="font-monospace bg-dark text-light"
+            >'URL'/patch/:city/:name</span
+          >
+          <p class="fs-6 mt-3">
+            Data yang akan diganti oleh user perlu dimasukkan ke dalam request
+            body dengan key 'name', 'city', dan 'address'. Ketiga data opsional
+            dan hanya data yang dispesifikasikan yang akan mengalami pergantian.
+          </p>
+        </div>
+      </div>
+    </div>
+
+<%- include('./partials/footer.ejs') %>

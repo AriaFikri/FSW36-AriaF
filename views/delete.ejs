@@ -1,0 +1,30 @@
+<%- include('./partials/header.ejs') %>
+
+
+    <div class="container">
+      <div class="container-fluid">
+        <h1>Introduction DELETE</h1>
+        <p class="fs-5">
+          Request DELETE digunakan untuk menghapus data dari database yang sudah
+          tersedia. Pada API ini, terdapat dua metode untuk menghapus data
+          yaitu:
+        </p>
+        <div class="container-fluid ms-3 color-light py-3">
+          <h3>DELETE all data</h3>
+          <p class="fs-6">
+            Semua data yang terdapat di tabel akan dihapus dengan request ini.
+            Request dilakukan tanpa parameter apapun dengan metode delete ke URL:
+          </p>
+          <span class="font-monospace bg-dark text-light">'URL'/delete</span>
+          <h3 class="mt-5">DELETE data by name and city</h3>
+          <p class="fs-6">
+            Request untuk menghapus data satu baris berdasarkan 'city' dan
+            'name' yang sesuai. <br />API ini akan menghapus satu baris data
+            dengan request body berupa 'name' dan 'city' dan metode delete ke url:
+          </p>
+          <span class="font-monospace bg-dark text-light">'URL'/search'</span>
+        </div>
+      </div>
+    </div>
+
+<%- include('./partials/footer.ejs') %>

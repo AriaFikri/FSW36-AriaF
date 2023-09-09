@@ -1,0 +1,25 @@
+<%- include('./partials/header.ejs') %>
+
+    <div class="container">
+      <div class="container-fluid">
+        <h1>Introduction PUT</h1>
+        <p class="fs-5">
+          Request PUT digunakan untuk merubah semua data dalam satu baris
+        </p>
+        <div class="container-fluid ms-3 color-light py-3">
+          <h3>PATCH data</h3>
+          <p class="fs-6">
+            Request PATCH akan mengganti semua data dalam satu baris (yang telah dispesifikasikan oleh user) tabel database ke URL: 
+          </p>
+          <span class="font-monospace bg-dark text-light"
+            >'URL'/update/:city/:name</span
+          >
+          <p class="fs-6 mt-3">
+            Data yang akan diganti oleh user perlu dimasukkan ke dalam request
+            body dengan key 'name', 'city', dan 'address'. Ketiga data harus dimasukkan oleh user.
+          </p>
+        </div>
+      </div>
+    </div>
+
+<%- include('./partials/footer.ejs') %>
