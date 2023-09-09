@@ -1,0 +1,117 @@
+<%- include('./partials/header.ejs') %>
+
+    <div class="container mb-3">
+      <div class="row row-gap-4">
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center">
+          <a href="/get" class="card">
+            <div class="card-body">
+              <img
+                src="./assets/page-analysis-svgrepo-com.svg"
+                alt=""
+                class="thumbnail"
+              />
+              <h4 class="card-title">GET Requests</h4>
+              <h6 class="card-subtitle mt-0.5 mb-2 text-body-secondary">
+                Menampilkan data
+              </h6>
+              <p class="card-text">
+                Request untuk menampilkan/mengirimkan semua data yang ada di
+                database. Semua data ataupun dengan filter per kota
+              </p>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center">
+          <a href="/post" class="card">
+            <div class="card-body">
+              <img
+                src="./assets/host-record-svgrepo-com.svg"
+                alt=""
+                class="thumbnail"
+              />
+              <h4 class="card-title">POST Request</h4>
+              <h6 class="card-subtitle mb-2 text-body-secondary">
+                Menambahkan data
+              </h6>
+              <p class="card-text">
+                Request untuk menambahkan satu baris data dalam semua kolom ke
+                tabel di database
+              </p>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center">
+          <a href="/put" class="card">
+            <div class="card-body">
+              <img
+                src="./assets/availability-svgrepo-com.svg"
+                alt=""
+                class="thumbnail"
+              />
+              <h4 class="card-title">PUT Request</h4>
+              <h6 class="card-subtitle mb-2 text-body-secondary">
+                Mengganti data
+              </h6>
+              <p class="card-text">
+                Request untuk mengganti satu baris data yang sudah ada di
+                database. Semua kolom data akan diganti
+              </p>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center">
+          <a href="/patch" class="card">
+            <div class="card-body">
+              <img
+                src="./assets/multiple-defenses-svgrepo-com.svg"
+                alt=""
+                class="thumbnail"
+              />
+              <h4 class="card-title">PATCH Request</h4>
+              <h6 class="card-subtitle mb-2 text-body-secondary">
+                Mengoreksi data
+              </h6>
+              <p class="card-text">
+                Request untuk mengoreksi data dalam satu baris. Hanya data
+                terpilih yang akan diganti
+              </p>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center">
+          <a href="/delete" class="card">
+            <div class="card-body">
+              <img
+                src="./assets/system-settings-svgrepo-com.svg"
+                alt=""
+                class="thumbnail"
+              />
+              <h4 class="card-title">DELETE Request</h4>
+              <h6 class="card-subtitle mb-2 text-body-secondary">
+                Menghapus data
+              </h6>
+              <p class="card-text">
+                Request untuk menghapus semua data dalam database ataupun satu
+                baris data berdasarkan kolom yang sudah ditentukan
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div
+      id="details"
+      class="container text-center mt-5 p-4 color-mid text-light fw-4 mb-5"
+    >
+      <em
+        >"Interaksi dengan database dilakukan dengan tabel bernama 'place' yang
+        berisikan kolom id, name, city, dan address yang menggambarkan tempat
+        dan alamat untuk dikunjungi user website."</em
+      ><br /><a
+      href="https://documenter.getpostman.com/view/28726812/2s9YC1WZj6#e799dcea-b131-48e0-8dc1-e670748f3238" id="text-style">
+    <img src="./assets/postman-logo-F43375A2EB-seeklogo.com.png" alt="" class="thumbnail">
+    Run melalui postman
+    </a>
+    </div>
+    
+<%- include('./partials/footer.ejs') %>

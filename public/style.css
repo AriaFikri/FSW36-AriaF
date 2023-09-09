@@ -1,0 +1,47 @@
+:root {
+    --color-dark: #1d3557;
+    --color-light: #f1faee;
+    --color-mid: #457b9d;
+}
+a {
+    text-decoration: none;
+}
+.card {
+    max-width: 400px;
+    transition: all 250ms ease;
+    border-color: var(--color-mid);
+}
+.card h4 {
+    display: inline;
+}
+.card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #85b2ce;
+}
+.thumbnail {
+    width: 40px;
+}
+.color-dark {
+    background-color: var(--color-dark);
+}
+.color-light {
+    background-color: var(--color-light);
+}
+.color-mid {
+    background-color: var(--color-mid);
+}
+.head-title {
+    background-color: var(--color-light);
+    height: 150px;
+}
+footer {
+    height: 40px;
+}
+#details {
+    width: 50%;
+}
+#text-style {
+    color: #f1faee;
+    text-decoration: underline;
+}

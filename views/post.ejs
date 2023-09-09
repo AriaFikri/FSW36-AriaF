@@ -1,0 +1,24 @@
+<%- include('./partials/header.ejs') %>
+
+    <div class="container">
+      <div class="container-fluid">
+        <h1>Introduction POST</h1>
+        <p class="fs-5">
+          Request POST digunakan untuk menambahkan data ke database yang sudah
+          tersedia
+        </p>
+        <div class="container-fluid ms-3 color-light py-3">
+          <h3>POST data</h3>
+          <p class="fs-6">
+            Proses request dengan metode POST dilakukan ke url:
+          </p>
+          <span class="font-monospace bg-dark text-light">'URL'/new</span>
+          <p class="fs-6 mt-3">
+            Data baru dicantumkan di dalam request body dengan pasangan
+            key-value dengan key berupa 'name', 'city' , dan 'address'. Dalam database, hanya kombinasi ketiga kolom 'name', 'city', dan 'address' harus unique (tidak diperbolehkan ada duplikat).
+          </p>
+        </div>
+      </div>
+    </div>
+
+<%- include('./partials/footer.ejs') %>

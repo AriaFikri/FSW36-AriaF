@@ -1,0 +1,30 @@
+<%- include('./partials/header.ejs') %>
+
+    <div class="container">
+      <div class="container-fluid">
+        <h1>Introduction GET</h1>
+        <p class="fs-5">
+          Request GET digunakan untuk mengambil data dari database yang sudah
+          tersedia. Pada API ini, terdapat dua metode untuk mengambil data
+          yaitu:
+        </p>
+        <div class="container-fluid ms-3 color-light py-3">
+          <h3>GET all data</h3>
+          <p class="fs-6">
+            Semua data di tabel dapat diakses dengan mengirimkan request GET
+            tanpa query params atau request body ke path:
+          </p>
+          <span class="font-monospace bg-dark text-light">'URL'/all</span>
+          <h3 class="mt-5">GET data by city</h3>
+          <p class="fs-6">
+            Request untuk memunculkan data satu baris berdasarkan 'city' yang
+            sesuai. <br>API ini akan menghasilkan data satu baris yang mencakup
+            kolom id, name, city, dan address. Keyword 'city' dimasukkan melalui
+            query param.
+          </p>
+          <span class="font-monospace bg-dark text-light">'URL'/search?city='contoh city'</span>
+        </div>
+      </div>
+    </div>
+
+<%- include('./partials/footer.ejs') %>

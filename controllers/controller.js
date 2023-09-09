@@ -102,7 +102,8 @@ module.exports = {
             )
 
             res.json({
-                data,
+                message: "data updated",
+                data
             })
 
         } catch (error) {
@@ -121,16 +122,16 @@ module.exports = {
 
         try {
         if (city) {
-            cityPointer = city;
             await db("place")
             .where({ name: namePointer, city: cityPointer })
             .update({ city });
+            cityPointer = city;
         }
         if (name) {
-            namePointer = name;
             await db("place")
             .where({ name: namePointer, city: cityPointer })
             .update({ name });
+            namePointer = name;
         }
         if (address) {
             await db("place")
