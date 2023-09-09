@@ -3,6 +3,10 @@ const route = express.Router();
 const control = require('../controllers/controller')
 const db = require('../db/db')
 
+// VIEW
+route.get('/', (req, res) => {
+    res.render('index.ejs')
+})
 // GET (READ)
 route.get("/all", control.getAll);
 route.get("/search", control.getSearch);
