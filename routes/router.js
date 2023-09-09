@@ -1,12 +1,12 @@
 const express = require("express");
 const route = express.Router();
-const control = require('../controllers/controller')
-const db = require('../db/db')
+const control = require("../controllers/controller");
+const db = require("../db/db");
 
 // VIEW
-route.get('/', (req, res) => {
-    res.render('index.ejs')
-})
+route.get("/", (req, res) => {
+  res.render("index.ejs");
+});
 route.get("/get", (req, res) => {
   res.render("get.ejs");
 });
