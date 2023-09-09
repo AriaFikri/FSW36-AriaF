@@ -1,82 +1,83 @@
 const db = require('../db/db')
 const model = require('../models/model')
-const express = require('express')
-const app = express()
-
-app.use(express.urlencoded({extended:false}))
-app.use(express.json())
 
 module.exports = {
     getAll: async (req, res) => {
+        try {
         const data = await model.getPlace
 
         res.json({
-        data,
-        });
+          data
+        })
+
+        } catch (error) {
+            res.json({
+                error: error.message
+            })
+        }
     },
 
     getSearch: async (req, res) => {
         const { city } = req.query;
+        try {
+            const data = await db("place").where({city}).select('*');
 
-        const data = await db("place")
-          .where({
-            city,
-          })
-          .select()
-          .catch((error) => {
-            console.error(error)
-          });
-
-        res.json({
-        data
-        });
+            res.json({
+              data
+            })
+        } catch (error) {
+            res.json({
+                error: error.message
+            })
+        }
     },
 
   postData: async (req, res) => {
-        const { name, address, city } = req.body;
+        const { name, city, address } = req.body;
 
-        await db("place")
-        .insert({
-            name,
-            city,
-            address,
-        })
-        .catch((error) => {
-            console.error(`${error}`);
-        });
+        try {
+
+        await model.postPlace(name, city, address); 
+        const data = await model.getPlace
 
         res.json({
         message: "Post processed",
-        });
+        data
+        })
+
+        } catch (error) {
+            res.json ({
+                error: error.message
+            })
+        }
     },
 
   deleteAll: async (req, res) => {
-        await model.delPlace;
+        try {
 
+        await model.delPlace;
         const data = await model.getPlace;
 
         res.json({
         data
-        });
+        })
+
+        } catch (error) {
+            res.json({
+                error: error.message
+            })
+        }
     },
 
   deleteSearch: async (req, res) => {
         const { name, city } = req.body;
 
-        await db("place")
-        .where({
-            name,
-            city,
-        })
-        .del()
-        .catch((error) => {
-            console.error(error)
-        });
+        await model.deleteSearch(name, city)
 
         const data = await model.getPlace;
 
         res.json({
-        data,
+        data
         });
     },
 
@@ -85,7 +86,8 @@ module.exports = {
         const passedName = req.params.name;
         const { name, city, address } = req.body;
 
-        const data = await db("place")
+        try {
+            const data = await db("place")
             .where({
             name: passedName,
             city: passedCity,
@@ -98,13 +100,16 @@ module.exports = {
             },
             ["name", "city", "address"]
             )
-            .catch((error) => {
-                console.error(error)
-            });
 
             res.json({
                 data,
-            });
+            })
+
+        } catch (error) {
+            res.json({
+                error: error.message
+            })
+        }
     },
 
   updatePatch:  async (req, res) => {
@@ -114,6 +119,7 @@ module.exports = {
         let namePointer = passedName;
         let cityPointer = passedCity;
 
+        try {
         if (city) {
             cityPointer = city;
             await db("place")
@@ -139,5 +145,10 @@ module.exports = {
         res.json({
             data,
         });
+        } catch (error) {
+            res.json({
+                error: error.message
+            })
+        }
     }
 };
