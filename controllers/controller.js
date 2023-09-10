@@ -2,154 +2,167 @@ const db = require('../db/db')
 const model = require('../models/model')
 
 module.exports = {
-    getAll: async (req, res) => {
-        try {
-        const data = await model.getPlace
+  getAll: async (req, res) => {
+    try {
+      const data = await model.getPlace;
 
-        res.json({
-          data
-        })
+      res.json({
+        data,
+      });
+    } catch (error) {
+      res.json({
+        error: error.message,
+      });
+    }
+  },
 
-        } catch (error) {
-            res.json({
-                error: error.message
-            })
-        }
-    },
+  getSearch: async (req, res) => {
+    const { city } = req.query;
+    try {
+      const data = await db("place").where({ city }).select("*");
 
-    getSearch: async (req, res) => {
-        const { city } = req.query;
-        try {
-            const data = await db("place").where({city}).select('*');
-
-            res.json({
-              data
-            })
-        } catch (error) {
-            res.json({
-                error: error.message
-            })
-        }
-    },
+      res.json({
+        data,
+      });
+    } catch (error) {
+      res.json({
+        error: error.message,
+      });
+    }
+  },
 
   postData: async (req, res) => {
-        const { name, city, address } = req.body;
+    const { name, city, address } = req.body;
 
-        try {
+    try {
+      await model.postPlace(name, city, address);
+      const data = await model.getPlace;
 
-        await model.postPlace(name, city, address); 
-        const data = await model.getPlace
-
-        res.json({
+      res.json({
         message: "Post processed",
-        data
-        })
-
-        } catch (error) {
-            res.json ({
-                error: error.message
-            })
-        }
-    },
+        data,
+      });
+    } catch (error) {
+      res.json({
+        error: error.message,
+      });
+    }
+  },
 
   deleteAll: async (req, res) => {
-        try {
+    try {
+      await model.delPlace;
+      const data = await model.getPlace;
 
-        await model.delPlace;
-        const data = await model.getPlace;
-
-        res.json({
-        data
-        })
-
-        } catch (error) {
-            res.json({
-                error: error.message
-            })
-        }
-    },
+      res.json({
+        data,
+      });
+    } catch (error) {
+      res.json({
+        error: error.message,
+      });
+    }
+  },
 
   deleteSearch: async (req, res) => {
-        const { name, city } = req.body;
+    const { name, city } = req.body;
 
-        await model.deleteSearch(name, city)
+    await model.deleteSearch(name, city);
 
-        const data = await model.getPlace;
+    const data = await model.getPlace;
 
-        res.json({
-        data
-        });
-    },
+    res.json({
+      data,
+    });
+  },
 
   updatePut: async (req, res) => {
-        const passedCity = req.params.city;
-        const passedName = req.params.name;
-        const { name, city, address } = req.body;
+    const passedCity = req.params.city;
+    const passedName = req.params.name;
+    const { name, city, address } = req.body;
 
-        try {
-            const data = await db("place")
-            .where({
-            name: passedName,
-            city: passedCity,
-            })
-            .update(
-            {
-                name,
-                city,
-                address,
-            },
-            ["name", "city", "address"]
-            )
+    try {
+      const data = await db("place")
+        .where({
+          name: passedName,
+          city: passedCity,
+        })
+        .update(
+          {
+            name,
+            city,
+            address,
+          },
+          ["name", "city", "address"]
+        );
 
-            res.json({
-                message: "data updated",
-                data
-            })
-
-        } catch (error) {
-            res.json({
-                error: error.message
-            })
-        }
-    },
-
-  updatePatch:  async (req, res) => {
-        const passedName = req.params.name;
-        const passedCity = req.params.city;
-        const { name, city, address } = req.body;
-        let namePointer = passedName;
-        let cityPointer = passedCity;
-
-        try {
-        if (city) {
-            await db("place")
-            .where({ name: namePointer, city: cityPointer })
-            .update({ city });
-            cityPointer = city;
-        }
-        if (name) {
-            await db("place")
-            .where({ name: namePointer, city: cityPointer })
-            .update({ name });
-            namePointer = name;
-        }
-        if (address) {
-            await db("place")
-            .where({ name: namePointer, city: cityPointer })
-            .update({ address });
-        }
-
-        const data = await db("place")
-            .where({ name: namePointer, city: cityPointer })
-            .select(["name", "city", "address"]);
-
-        res.json({
-            data,
-        });
-        } catch (error) {
-            res.json({
-                error: error.message
-            })
-        }
+      res.json({
+        message: "data updated",
+        data,
+      });
+    } catch (error) {
+      res.json({
+        error: error.message,
+      });
     }
+  },
+
+  updatePatch: async (req, res) => {
+    const passedName = req.params.name;
+    const passedCity = req.params.city;
+    const { name, city, address } = req.body;
+    let namePointer = passedName;
+    let cityPointer = passedCity;
+
+    try {
+      if (city) {
+        await db("place")
+          .where({ name: namePointer, city: cityPointer })
+          .update({ city });
+        cityPointer = city;
+      }
+      if (name) {
+        await db("place")
+          .where({ name: namePointer, city: cityPointer })
+          .update({ name });
+        namePointer = name;
+      }
+      if (address) {
+        await db("place")
+          .where({ name: namePointer, city: cityPointer })
+          .update({ address });
+      }
+
+      const data = await db("place")
+        .where({ name: namePointer, city: cityPointer })
+        .select(["name", "city", "address"]);
+
+      res.json({
+        data,
+      });
+    } catch (error) {
+      res.json({
+        error: error.message,
+      });
+    }
+  },
+  //   VIEW
+  indexPage: (req, res) => {
+    res.render("index.ejs");
+  },
+  getPage: (req, res) => {
+    res.render("get.ejs");
+  },
+  postPage: (req, res) => {
+    res.render("post.ejs");
+  },
+  patchPage: (req, res) => {
+    res.render("patch.ejs");
+  },
+  deletePage: (req, res) => {
+    res.render("delete.ejs");
+  },
+  putPage: (req, res) => {
+    res.render("put.ejs");
+  }
 };
